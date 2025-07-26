@@ -64,7 +64,7 @@ export default async function BookPage({ params }: Props) {
       </div>
 
       <div>
-        <h1 className="text-4xl font-bold mb-2" style={{fontFamily: "var(--font-averia)"}}>{book.title}</h1>
+        <h1 className="text-4xl font-bold" style={{fontFamily: "var(--font-averia)"}}>{book.title}</h1>
 
         <p className="text-lg text-[var(--foreground-faint)] mb-1">
           by{" "}
@@ -73,7 +73,7 @@ export default async function BookPage({ params }: Props) {
                 <span key={author.key}>
                   <Link
                     href={`/author/${author.key}`}
-                    className="hover:text-[var(--color-blue)] transition-colors"
+                    className="hover:text-[var(--color-blue)] transition-colors mb-4"
                   >
                     {author.name}
                   </Link>

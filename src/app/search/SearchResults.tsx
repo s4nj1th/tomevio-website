@@ -5,6 +5,8 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Book, Author, searchBooksAndAuthors } from "@/lib/search";
 
+import AuthorImage from "@/components/AuthorImage";
+
 export default function SearchResults() {
   const searchParams = useSearchParams();
   const query = searchParams.get("q") || "";
@@ -36,94 +38,101 @@ export default function SearchResults() {
       );
     }
 
-    if (filter === "books") {
-      return (
-        <section className="mb-10">
-          {books.length > 0 ? (
-            <ul className="space-y-3">
-              {books.map((book) => (
-                <div key={book.work_id}>
-                  <li
-                    key={book.work_id}
-                    className="flex gap-4 px-5 py-6 items-center"
-                  >
+    const sharedItemClasses =
+      "flex gap-4 px-5 py-6 items-center transition hover:bg-[var(--background-bright)] rounded-md";
+
+    const imageWrapperClasses =
+      "w-[80px] h-[120px] flex items-center justify-center bg-gray-100 text-gray-600 text-[10px] shadow-[var(--shadow-hard)] overflow-hidden";
+
+    const renderBookList = () => (
+      <section className="mb-10">
+        {books.length > 0 ? (
+          <ul className="space-y-3">
+            {books.map((book) => (
+              <div key={book.work_id}>
+                <li className={sharedItemClasses}>
+                  <div className={imageWrapperClasses}>
                     {book.cover_id && book.cover_id > 0 ? (
                       <img
                         src={`https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
-                        alt={`${book.title}`}
-                        width="80"
-                        height="120"
-                        className="shadow-[var(--shadow-hard)] object-cover"
+                        alt={book.title}
+                        className="w-full h-full object-cover"
                       />
                     ) : (
                       <div
-                        className="w-[80px] h-[120px] bg-gray-300 text-gray-600 text-[10px] flex items-center justify-center text-center px-1 shadow-[var(--shadow-hard)]"
+                        className="text-center px-1"
                         style={{ fontFamily: "var(--font-averia)" }}
                       >
                         {book.title}
-                        <br />
-                        ({book.first_publish_year})
+                        <br />({book.first_publish_year})
                       </div>
                     )}
-                    <div className="flex flex-col justify-center">
-                      <p
-                        className="space-x-2 font-black"
-                        style={{ fontFamily: "var(--font-averia)" }}
-                      >
-                        <Link
-                          href={`/book/${book.work_id}`}
-                          className="text-2xl hover:text-[var(--color-blue)] transition-colors"
-                        >
-                          {book.title}
-                        </Link>
-                        <span className="text-[var(--foreground-faint)] text-sm">
-                          ({book.first_publish_year})
-                        </span>
-                      </p>
-                      <p className="text-[var(--foreground-muted)] text-sm">
-                        by {book.author_name?.join(", ") || "Unknown"}
-                      </p>
-                    </div>
-                  </li>
-                  <hr className="border-[var(--border-muted)] mx-5" />
-                </div>
-              ))}
-            </ul>
-          ) : (
-            <p className="text-[var(--foreground-dim)] text-center">
-              No books found.
-            </p>
-          )}
-        </section>
-      );
-    }
-
-    if (filter === "authors") {
-      return (
-        <section>
-          <ul className="space-y-3">
-            {authors.length > 0 ? (
-              authors.map((author, idx) => (
-                <li key={`${author.name}-${idx}`}>
-                  <span className="font-medium text-[var(--foreground)]">
-                    {author.name}
-                  </span>
-                  <span className="text-sm text-[var(--foreground-muted)] ml-2">
-                    ({author.work_count} works)
-                  </span>
+                  </div>
+                  <div className="flex flex-col justify-center">
+                    <Link
+                      href={`/book/${book.work_id}`}
+                      className="text-2xl font-bold hover:text-[var(--color-blue)] transition-colors"
+                      style={{ fontFamily: "var(--font-averia)" }}
+                    >
+                      {book.title}
+                    </Link>
+                    <span className="text-sm text-[var(--foreground-muted)] ml-1">
+                      by {book.author_name?.join(", ") || "Unknown"} (
+                      {book.first_publish_year || "n.d."})
+                    </span>
+                  </div>
                 </li>
-              ))
-            ) : (
-              <p className="text-[var(--foreground-dim)] text-center">
-                No authors found.
-              </p>
-            )}
+                <hr className="border-[var(--border-muted)] mx-5" />
+              </div>
+            ))}
           </ul>
-        </section>
-      );
-    }
+        ) : (
+          <p className="text-[var(--foreground-dim)] text-center">
+            No books found.
+          </p>
+        )}
+      </section>
+    );
 
-    return null;
+    const renderAuthorList = () => (
+      <section className="mb-10">
+        {authors.length > 0 ? (
+          <ul className="space-y-3">
+            {authors.map((author, idx) => (
+              <div key={`${author.author_id}-${idx}`}>
+                <li className={sharedItemClasses}>
+                  <div className={imageWrapperClasses}>
+                    <AuthorImage
+                      author_id={author.author_id}
+                      name={author.name}
+                    />
+                  </div>
+                  <div className="flex flex-col justify-center">
+                    <Link
+                      href={`/author/${author.author_id}`}
+                      className="text-2xl font-bold hover:text-[var(--color-blue)] transition-colors"
+                      style={{ fontFamily: "var(--font-averia)" }}
+                    >
+                      {author.name}
+                    </Link>
+                    <span className="text-sm text-[var(--foreground-muted)] ml-1">
+                      ({author.work_count} works)
+                    </span>
+                  </div>
+                </li>
+                <hr className="border-[var(--border-muted)] mx-5" />
+              </div>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-[var(--foreground-dim)] text-center">
+            No authors found.
+          </p>
+        )}
+      </section>
+    );
+
+    return filter === "books" ? renderBookList() : renderAuthorList();
   };
 
   const FilterDropdown = () => (
