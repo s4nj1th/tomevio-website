@@ -1,37 +1,61 @@
 import Link from "next/link";
-import HeroLogo from "@/components/HeroLogo";
+// import HeroLogo from "@/components/HeroLogo";
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <section className="animate-fade-in dela flex flex-col items-center justify-center py-20 px-6 text-center border-b border-border-default">
-        <img
+      <section className="relative isolate animate-fade-in min-h-[60vh] flex flex-col gap-8 items-center justify-center py-20 px-6 text-center border-b border-border-default overflow-hidden">
+        {/* <HeroLogo /> */}
+        {/* <img
           src="/logo-dark.svg"
           alt="Tomevio Logo"
           className="w-100 h-100 mb-6 animate-fade-in animate-float"
-        />
-        {/* <HeroLogo /> */}
-        <h1 className="text-5xl font-[700] mb-4 text-minotaur font-averia">
+        /> */}
+        {/* <h1 className="text-5xl font-[700] mb-4 text-minotaur font-averia">
           Tomevio
-        </h1>
-        <p className="text-xl mb-6 max-w-2xl text-foreground-dim">
+        </h1> */}
+        {/* <p className="text-xl mb-6 max-w-2xl text-foreground-dim">
           Open-source book tracking. Search, organize, and follow your reading
           journey across devices.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 mt-4">
-          <Link
-            href="/search"
-            className="px-6 py-3 rounded bg-foreground text-background shadow-shadow-soft hover:bg-foreground-dim font-bold transition"
-          >
-            Get Started
-          </Link>
-          <Link
-            href="/about"
-            className="px-6 py-3 rounded border border-border-muted text-foreground hover:bg-background-brightest font-bold transition"
-          >
-            Learn More
-          </Link>
+        </p> */}
+
+        <div className="pointer-events-none">
+          <img
+            src="/starryNightL.jpg"
+            alt="Background"
+            className="animate-fade-in opacity-0 absolute inset-0 -z-10 w-full h-full object-cover md:opacity-80"
+          />
+          <img
+            src="/starryNightS.jpg"
+            alt="Background"
+            className="animate-fade-in opacity-80 absolute inset-0 -z-10 w-full h-full object-cover md:opacity-0"
+          />
+
+          <div className="absolute inset-0 -z-10 bg-gradient-to-t from-background via-transparent to-transparent" />
+          <div className="absolute inset-0 -z-10 bg-gradient-to-r from-background via-transparent to-transparent" />
+          <div className="absolute inset-0 -z-10 bg-gradient-to-tr from-background via-transparent to-transparent" />
+          <div className="absolute inset-0 -z-10 bg-gradient-to-l from-background via-transparent to-transparent" />
+          <div className="absolute inset-0 -z-10 bg-gradient-to-tl from-background via-transparent to-transparent" />
         </div>
+
+        <h1 className="animate-fade-in text-2xl md:text-4xl font-[700] mb-4 font-averia text-shadow-md">
+          Build your personal library. <br />
+          Keep track of your friends' reads. <br />
+          Never lose a great book again. <br />
+        </h1>
+        <Link
+          href="/search"
+          className="animate-fade-in px-6 py-2 font-black rounded bg-foreground text-background-bright shadow-shadow-soft hover:bg-foreground-dim transition"
+        >
+          Get Started
+        </Link>
+
+        {/* <div className="absolute -bottom-80 -z-10 pointer-events-none">
+          <img
+            src="/logo-dark.svg"
+            className="opacity-0 md:opacity-20 w-200 h-200 animate-float"
+          />
+        </div> */}
       </section>
 
       <section className="animate-fade-in py-16 px-6 bg-background">

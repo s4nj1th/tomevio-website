@@ -7,17 +7,12 @@ export default function NavBar() {
       <div className="max-w-4xl mx-auto flex items-center justify-between">
         <Link className="flex items-end" href={"/"}>
           <img
-            src="/logo-light.svg"
-            alt="Tomevio"
-            className="h-10 w-auto dark:hidden"
-          />
-          <img
             src="/logo-dark.svg"
             alt="Tomevio"
-            className="h-10 w-auto hidden dark:block"
+            className="h-10 w-auto z-2"
           />
           <h1
-            className="hidden md:block text-3xl text-[#f2f2f2] font-averia"
+            className="hidden md:block text-4xl text-[#f2f2f2] font-averia font-bold -ml-2.5"
           >
             omevio
           </h1>
