@@ -17,7 +17,7 @@ export default function NavBar() {
             className="h-10 w-auto hidden dark:block"
           />
           <h1
-            className="hidden md:block text-3xl font-bold text-[#f2f2f2] font-averia"
+            className="hidden md:block text-3xl text-[#f2f2f2] font-averia"
           >
             omevio
           </h1>

@@ -71,6 +71,8 @@
   /* Font Families */
   --font-atkinson: "Atkinson Hyperlegible", sans-serif;
   --font-averia: "Averia Serif Libre", serif;
+
+  /* --animate-float: float 0.3s ease-out; */
 }
 
 @layer base {
@@ -81,5 +83,37 @@
 
   button {
     cursor: pointer;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fade-in 0.8s ease-in-out both;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+    
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0);
+    }
   }
 }

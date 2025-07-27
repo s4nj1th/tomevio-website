@@ -136,7 +136,7 @@ export default function SearchResults() {
     <div className="md:hidden mb-4">
       <label
         htmlFor="filter-select"
-        className="block text-xs text-[foreground-muted] uppercase mb-1 tracking-wide"
+        className="block text-xs text-foreground-muted uppercase mb-1 tracking-wide"
       >
         Show results for
       </label>
@@ -145,12 +145,12 @@ export default function SearchResults() {
           id="filter-select"
           value={filter}
           onChange={(e) => setFilter(e.target.value as "books" | "authors")}
-          className="w-full appearance-none bg-[background-secondary] text-foreground font-semibold px-4 py-2 pr-10 rounded border border-border-default focus:outline-none"
+          className="w-full appearance-none bg-background-secondary text-foreground font-semibold px-4 py-2 pr-10 rounded border border-border-default focus:outline-none"
         >
           <option value="books">Books</option>
           <option value="authors">Authors</option>
         </select>
-        <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-[foreground-muted]">
+        <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-foreground-muted">
           <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
             <path
               fillRule="evenodd"
@@ -164,19 +164,19 @@ export default function SearchResults() {
   );
 
   const FilterSidebar = () => (
-    <div className="hidden md:block w-full md:w-64 shrink-0 p-4 bg-[background-secondary] rounded border border-border-default h-fit">
-      <h3 className="text-xs font-medium text-[foreground-muted] uppercase mb-3">
+    <div className="hidden md:block w-full md:w-64 shrink-0 p-4 bg-background-secondary rounded border border-border-default h-fit">
+      <h3 className="text-xs font-medium text-foreground-muted uppercase mb-3">
         Show results for
       </h3>
-      <ul className="space-y-1 text-sm text-[foreground-dim] font-medium">
+      <ul className="space-y-1 text-sm text-foreground-dim font-medium">
         {["books", "authors"].map((item) => (
           <li key={item}>
             <button
               onClick={() => setFilter(item as "books" | "authors")}
               className={`block w-full text-left px-2 py-1 rounded transition ${
                 filter === item
-                  ? "bg-[background-bright] text-foreground"
-                  : "hover:bg-[background-bright]"
+                  ? "bg-background-bright text-foreground"
+                  : "hover:bg-background-bright"
               }`}
             >
               {item.charAt(0).toUpperCase() + item.slice(1)}
@@ -190,10 +190,10 @@ export default function SearchResults() {
   return (
     <main className="px-4 py-12 text-foreground flex flex-col md:flex-row gap-8">
       <div className="flex-1">
-        <p className="text-sm text-[foreground-muted] uppercase py-2">
+        <p className="text-sm text-foreground-muted uppercase py-2">
           Search results for &quot;{query}&quot;
         </p>
-        <hr className="mb-6 border-[border-muted]" />
+        <hr className="mb-6 border-border-muted" />
         <FilterDropdown />
         {renderResults()}
       </div>
