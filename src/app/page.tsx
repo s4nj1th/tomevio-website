@@ -75,7 +75,7 @@ export default function Home() {
           </h2>
           <p className="text-foreground-muted">
             Login, personalized libraries, and reading progress sync are{' '}
-            <strong className="text-color-warning">Work in Progress (WIP)</strong>.
+            <strong className="text-warning">Work in Progress (WIP)</strong>.
           </p>
         </div>
       </section>

@@ -50,7 +50,7 @@ export default async function AuthorPage({ params }: Props) {
                 {author.works.map((book) => (
                   <li key={book.work_id} className="mb-1">
                     <img src={`https://covers.openlibrary.org/b/olid/${book.work_id}-M.jpg`}  />
-                    <Link href={`/book/${book.work_id}`} className="hover:text-[var(--color-blue)] transition-colors">
+                    <Link href={`/book/${book.work_id}`} className="hover:text-blue transition-colors">
                     {book.title}
                     </Link>
                   </li>
