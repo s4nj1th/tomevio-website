@@ -32,17 +32,17 @@ export default function SearchResults() {
   const renderResults = () => {
     if (loading) {
       return (
-        <p className="text-[var(--foreground-muted)] text-center">
+        <p className="text-foreground-muted text-center">
           Searching...
         </p>
       );
     }
 
     const sharedItemClasses =
-      "flex gap-4 px-5 py-6 items-center transition hover:bg-[var(--background-bright)] rounded-md";
+      "flex gap-4 px-5 py-6 items-center transition hover:bg-background-bright rounded-md";
 
     const imageWrapperClasses =
-      "w-[80px] h-[120px] flex items-center justify-center bg-gray-100 text-gray-600 text-[10px] shadow-[var(--shadow-hard)] overflow-hidden";
+      "w-[80px] h-[120px] flex items-center justify-center bg-gray-100 text-gray-600 text-[10px] shadow-shadow-hard overflow-hidden";
 
     const renderBookList = () => (
       <section className="mb-10">
@@ -60,8 +60,7 @@ export default function SearchResults() {
                       />
                     ) : (
                       <div
-                        className="text-center px-1"
-                        style={{ fontFamily: "var(--font-averia)" }}
+                        className="text-center px-1 font-averia"
                       >
                         {book.title}
                         <br />({book.first_publish_year})
@@ -71,23 +70,22 @@ export default function SearchResults() {
                   <div className="flex flex-col justify-center">
                     <Link
                       href={`/book/${book.work_id}`}
-                      className="text-2xl font-bold hover:text-[var(--color-blue)] transition-colors"
-                      style={{ fontFamily: "var(--font-averia)" }}
+                      className="text-2xl font-bold hover:text-blue transition-colors font-averia"
                     >
                       {book.title}
                     </Link>
-                    <span className="text-sm text-[var(--foreground-muted)] ml-1">
+                    <span className="text-sm text-foreground-muted ml-1">
                       by {book.author_name?.join(", ") || "Unknown"} (
                       {book.first_publish_year || "n.d."})
                     </span>
                   </div>
                 </li>
-                <hr className="border-[var(--border-muted)] mx-5" />
+                <hr className="border-border-muted mx-5" />
               </div>
             ))}
           </ul>
         ) : (
-          <p className="text-[var(--foreground-dim)] text-center">
+          <p className="text-foreground-dim text-center">
             No books found.
           </p>
         )}
@@ -110,22 +108,21 @@ export default function SearchResults() {
                   <div className="flex flex-col justify-center">
                     <Link
                       href={`/author/${author.author_id}`}
-                      className="text-2xl font-bold hover:text-[var(--color-blue)] transition-colors"
-                      style={{ fontFamily: "var(--font-averia)" }}
+                      className="text-2xl font-bold hover:text-blue transition-colors font-averia"
                     >
                       {author.name}
                     </Link>
-                    <span className="text-sm text-[var(--foreground-muted)] ml-1">
+                    <span className="text-sm text-foreground-muted ml-1">
                       ({author.work_count} works)
                     </span>
                   </div>
                 </li>
-                <hr className="border-[var(--border-muted)] mx-5" />
+                <hr className="border-border-muted mx-5" />
               </div>
             ))}
           </ul>
         ) : (
-          <p className="text-[var(--foreground-dim)] text-center">
+          <p className="text-foreground-dim text-center">
             No authors found.
           </p>
         )}
@@ -139,7 +136,7 @@ export default function SearchResults() {
     <div className="md:hidden mb-4">
       <label
         htmlFor="filter-select"
-        className="block text-xs text-[var(--foreground-muted)] uppercase mb-1 tracking-wide"
+        className="block text-xs text-[foreground-muted] uppercase mb-1 tracking-wide"
       >
         Show results for
       </label>
@@ -148,12 +145,12 @@ export default function SearchResults() {
           id="filter-select"
           value={filter}
           onChange={(e) => setFilter(e.target.value as "books" | "authors")}
-          className="w-full appearance-none bg-[var(--background-secondary)] text-[var(--foreground)] font-semibold px-4 py-2 pr-10 rounded border border-[var(--border-default)] focus:outline-none"
+          className="w-full appearance-none bg-[background-secondary] text-foreground font-semibold px-4 py-2 pr-10 rounded border border-border-default focus:outline-none"
         >
           <option value="books">Books</option>
           <option value="authors">Authors</option>
         </select>
-        <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-[var(--foreground-muted)]">
+        <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-[foreground-muted]">
           <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
             <path
               fillRule="evenodd"
@@ -167,19 +164,19 @@ export default function SearchResults() {
   );
 
   const FilterSidebar = () => (
-    <div className="hidden md:block w-full md:w-64 shrink-0 p-4 bg-[var(--background-secondary)] rounded border border-[var(--border-default)] h-fit">
-      <h3 className="text-xs font-medium text-[var(--foreground-muted)] uppercase mb-3">
+    <div className="hidden md:block w-full md:w-64 shrink-0 p-4 bg-[background-secondary] rounded border border-border-default h-fit">
+      <h3 className="text-xs font-medium text-[foreground-muted] uppercase mb-3">
         Show results for
       </h3>
-      <ul className="space-y-1 text-sm text-[var(--foreground-dim)] font-medium">
+      <ul className="space-y-1 text-sm text-[foreground-dim] font-medium">
         {["books", "authors"].map((item) => (
           <li key={item}>
             <button
               onClick={() => setFilter(item as "books" | "authors")}
               className={`block w-full text-left px-2 py-1 rounded transition ${
                 filter === item
-                  ? "bg-[var(--background-bright)] text-[var(--foreground)]"
-                  : "hover:bg-[var(--background-bright)]"
+                  ? "bg-[background-bright] text-foreground"
+                  : "hover:bg-[background-bright]"
               }`}
             >
               {item.charAt(0).toUpperCase() + item.slice(1)}
@@ -191,12 +188,12 @@ export default function SearchResults() {
   );
 
   return (
-    <main className="px-4 py-12 text-[var(--foreground)] flex flex-col md:flex-row gap-8">
+    <main className="px-4 py-12 text-foreground flex flex-col md:flex-row gap-8">
       <div className="flex-1">
-        <p className="text-sm text-[var(--foreground-muted)] uppercase py-2">
+        <p className="text-sm text-[foreground-muted] uppercase py-2">
           Search results for &quot;{query}&quot;
         </p>
-        <hr className="mb-6 border-[var(--border-muted)]" />
+        <hr className="mb-6 border-[border-muted]" />
         <FilterDropdown />
         {renderResults()}
       </div>

@@ -20,8 +20,7 @@ export default function AuthorImage({ author_id, name }: { author_id: string; na
   if (!imageAvailable) {
     return (
       <div
-        className="w-[80px] h-[120px] bg-gray-200 text-gray-600 text-[10px] flex items-center justify-center text-center px-1 shadow-[var(--shadow-hard)]"
-        style={{ fontFamily: "var(--font-averia)" }}
+        className="w-[80px] h-[120px] bg-gray-200 text-gray-600 text-[10px] flex items-center justify-center text-center px-1 shadow-shadow-hard font-averia"
       >
         {name}
       </div>

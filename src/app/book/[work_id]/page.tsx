@@ -64,16 +64,16 @@ export default async function BookPage({ params }: Props) {
       </div>
 
       <div>
-        <h1 className="text-4xl font-bold" style={{fontFamily: "var(--font-averia)"}}>{book.title}</h1>
+        <h1 className="text-4xl font-bold font-averia">{book.title}</h1>
 
-        <p className="text-lg text-[var(--foreground-faint)] mb-1">
+        <p className="text-lg text-foreground-faint mb-1">
           by{" "}
           {book.authors && book.authors.length > 0
             ? book.authors.map((author, idx) => (
                 <span key={author.key}>
                   <Link
                     href={`/author/${author.key}`}
-                    className="hover:text-[var(--color-blue)] transition-colors mb-4"
+                    className="hover:text-blue transition-colors mb-4"
                   >
                     {author.name}
                   </Link>
@@ -83,12 +83,12 @@ export default async function BookPage({ params }: Props) {
             : "Unknown"}
         </p>
 
-        {/* <p className="text-sm text-[var(--foreground-faint)] mb-4">
+        {/* <p className="text-sm text-[foreground-faint] mb-4">
           First published in {book.first_publish_year || "N/A"}
         </p> */}
 
         {quote && (
-          <p className="font-bold text-md mb-4" style={{fontFamily: "var(--font-averia)"}}>{quote}</p>
+          <p className="font-bold text-md mb-4 font-averia">{quote}</p>
         )}
 
         <p className="whitespace-pre-line text-sm">{body}</p>

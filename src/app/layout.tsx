@@ -42,10 +42,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${atkinson.variable} ${averiaSerif.variable} antialiased`}
-      >
+    <html lang="en" className={`${atkinson.variable} ${averiaSerif.variable}`}>
+      <body className="antialiased">
         <NavBar />
         <main className="min-h-screen max-w-4xl mx-auto">{children}</main>
         <Footer />

@@ -37,19 +37,19 @@ export default async function AuthorPage({ params }: Props) {
   return (
     <div className="flex flex-row py-8 gap-8">
       <div className="grow">
-        <p className="text-md text-[var(--foreground-faint)]">Books by</p>
+        <p className="text-md text-foreground-faint">Books by</p>
         <h1
-          className="text-2xl font-bold mb-4"
-          style={{ fontFamily: "var(--font-averia)" }}
+          className="text-2xl font-bold mb-4 font-averia"
         >
           {author.name}
         </h1>
-        <div className="border border-[var(--border-muted)] rounded p-4">
+        <div className="border border-border-muted rounded p-4">
           {author.works && author.works.length > 0 ? (
             <div className="">
               <ul className="list-disc pl-5">
                 {author.works.map((book) => (
                   <li key={book.work_id} className="mb-1">
+                    <img src={`https://covers.openlibrary.org/b/olid/${book.work_id}-M.jpg`}  />
                     <Link href={`/book/${book.work_id}`} className="hover:text-[var(--color-blue)] transition-colors">
                     {book.title}
                     </Link>
@@ -58,7 +58,7 @@ export default async function AuthorPage({ params }: Props) {
               </ul>
             </div>
           ) : (
-            <p className="text-[var(--foreground-faint)] text-center items-center">
+            <p className="text-foreground-faint text-center items-center">
               No books available.
             </p>
           )}
@@ -69,12 +69,12 @@ export default async function AuthorPage({ params }: Props) {
         <img
           src={`https://covers.openlibrary.org/a/olid/${params.author_id}-L.jpg`}
           alt={author.name}
-          className="w-full border border-[var(--border-default)] rounded shadow-lg"
+          className="w-full border border-border-default rounded shadow-lg"
         />
         {author.bio ? (
-          <p className="text-[var(--foreground-faint)]">{author.bio}</p>
+          <p className="text-foreground-faint">{author.bio}</p>
         ) : (
-          <p className="text-[var(--foreground-faint)] text-center">No biography available.</p>
+          <p className="text-foreground-faint text-center">No biography available.</p>
         )}
       </div>
     </div>

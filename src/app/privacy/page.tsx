@@ -1,6 +1,6 @@
 export default function PrivacyPage() {
   return (
-    <main className="max-w-4xl mx-auto px-4 py-12 text-[var(--foreground)]">
+    <main className="max-w-4xl mx-auto px-4 py-12 text-foreground">
       <h1 className="text-3xl font-bold mb-4">Privacy Policy</h1>
       <p className="mb-4">
         Tomevio respects your privacy. This site does not collect personal
@@ -16,7 +16,7 @@ export default function PrivacyPage() {
         code on{" "}
         <a
           href="https://github.com/s4nj1th/tomevio-website"
-          className="text-[var(--color-primary)] underline hover:text-[var(--color-primary-bright)]"
+          className="text-primary underline hover:text-primary-bright"
           target="_blank"
           rel="noopener noreferrer"
         >
