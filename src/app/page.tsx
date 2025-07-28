@@ -3,8 +3,8 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background text-foreground">
-      <section className="relative isolate animate-fade-in min-h-[60vh] flex flex-col gap-8 items-center justify-center py-20 px-6 text-center border-b border-border-default overflow-hidden">
+    <main className="animate-fade-in min-h-screen bg-background text-foreground">
+      <section className="relative isolate animate-fade-in min-h-[60vh] flex flex-col gap-8 items-center justify-center py-20 px-6 text-center overflow-hidden">
         {/* <HeroLogo /> */}
         {/* <img
           src="/logo-dark.svg"
@@ -38,14 +38,14 @@ export default function Home() {
           <div className="absolute inset-0 -z-10 bg-gradient-to-tl from-background via-transparent to-transparent" />
         </div>
 
-        <h1 className="animate-fade-in text-2xl md:text-4xl font-[700] mb-4 font-averia text-shadow-md">
+        <h1 className="animate-fade-in text-2xl md:text-4xl font-[700] mb-4 font-averia drop-shadow-lg drop-shadow-black">
           Build your personal library. <br />
           Keep track of your friends' reads. <br />
           Never lose a great book again. <br />
         </h1>
         <Link
           href="/search"
-          className="animate-fade-in px-6 py-2 font-black rounded bg-foreground text-background-bright shadow-shadow-soft hover:bg-foreground-dim transition"
+          className="animate-fade-in px-6 py-2 font-black rounded drop-shadow-md drop-shadow-black bg-foreground text-background-bright shadow-shadow-soft hover:bg-foreground-dim transition"
         >
           Get Started
         </Link>
@@ -57,6 +57,8 @@ export default function Home() {
           />
         </div> */}
       </section>
+
+      <hr className="mx-5 my-5 border-border-muted" />
 
       <section className="animate-fade-in py-16 px-6 bg-background">
         <div className="max-w-5xl mx-auto text-center">
@@ -92,7 +94,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="animate-fade-in py-12 px-6 text-center border-t border-border-default">
+      <hr className="mx-5 my-5 border-border-muted" />
+
+      <section className="animate-fade-in py-12 px-6 text-center">
         <div className="max-w-xl mx-auto">
           <h2 className="text-2xl font-semibold mb-4 text-foreground font-averia">
             Coming Soon
@@ -103,6 +107,7 @@ export default function Home() {
           </p>
         </div>
       </section>
+
     </main>
   );
 }

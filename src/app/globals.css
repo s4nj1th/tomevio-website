@@ -84,6 +84,14 @@
   button {
     cursor: pointer;
   }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE/Edge */
+    scrollbar-width: none; /* Firefox */
+  }
 }
 
 @layer utilities {
@@ -102,7 +110,6 @@
     100% {
       opacity: 1;
     }
-    
   }
 
   @keyframes float {

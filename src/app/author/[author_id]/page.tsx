@@ -38,27 +38,32 @@ export default async function AuthorPage({ params }: Props) {
     <div className="flex flex-row py-8 gap-8">
       <div className="grow">
         <p className="text-md text-foreground-faint">Books by</p>
-        <h1
-          className="text-2xl font-bold mb-4 font-averia"
-        >
-          {author.name}
-        </h1>
+        <h1 className="text-2xl font-bold font-averia">{author.name}</h1>
+        {author.lifespan && (
+          <p className="text-sm text-foreground-muted mb-4">{author.lifespan}</p>
+        )}
+
         <div className="border border-border-muted rounded p-4">
           {author.works && author.works.length > 0 ? (
             <div className="">
               <ul className="list-disc pl-5">
                 {author.works.map((book) => (
                   <li key={book.work_id} className="mb-1">
-                    <img src={`https://covers.openlibrary.org/b/olid/${book.work_id}-M.jpg`}  />
-                    <Link href={`/book/${book.work_id}`} className="hover:text-blue transition-colors">
-                    {book.title}
+                    <img
+                      src={`https://covers.openlibrary.org/b/olid/${book.work_id}-M.jpg`}
+                    />
+                    <Link
+                      href={`/book/${book.work_id}`}
+                      className="hover:text-blue transition-colors"
+                    >
+                      {book.title}
                     </Link>
                   </li>
                 ))}
               </ul>
             </div>
           ) : (
-            <p className="text-foreground-faint text-center items-center">
+            <p className="text-foreground-muted text-center items-center">
               No books available.
             </p>
           )}
@@ -74,7 +79,9 @@ export default async function AuthorPage({ params }: Props) {
         {author.bio ? (
           <p className="text-foreground-faint">{author.bio}</p>
         ) : (
-          <p className="text-foreground-faint text-center">No biography available.</p>
+          <p className="text-foreground-faint text-center">
+            No biography available.
+          </p>
         )}
       </div>
     </div>

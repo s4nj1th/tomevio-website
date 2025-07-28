@@ -48,16 +48,16 @@ export default async function BookPage({ params }: Props) {
   const { quote, body } = parseDescription(book.description);
 
   return (
-    <div className="flex p-8 gap-8">
-      <div className="w-[192px] shrink-0">
+    <div className="flex md:flex-row flex-col p-8 gap-4">
+      <div className="w-[200px] aspect-[2/3] shrink-0 rounded overflow-hidden">
         {hasValidCover ? (
           <img
             src={`https://covers.openlibrary.org/b/id/${book.covers[0]}-L.jpg`}
             alt={book.title}
-            className="mb-4 w-full h-auto rounded shadow object-contain"
+            className="w-full h-fit object-contain border border-border-muted shadow-lg shadow-black"
           />
         ) : (
-          <div className="mb-4 w-full h-[400px] flex items-center justify-center bg-gray-300 text-center text-sm text-gray-600 p-4 rounded shadow">
+          <div className="w-full h-full flex items-center justify-center text-center text-lg text-background-brightest font-averia p-4 border border-border-muted shadow-lg shadow-black">
             {book.title}
           </div>
         )}
@@ -66,14 +66,14 @@ export default async function BookPage({ params }: Props) {
       <div>
         <h1 className="text-4xl font-bold font-averia">{book.title}</h1>
 
-        <p className="text-lg text-foreground-faint mb-1">
+        <p className="text-lg text-foreground-faint mb-4">
           by{" "}
           {book.authors && book.authors.length > 0
             ? book.authors.map((author, idx) => (
                 <span key={author.key}>
                   <Link
                     href={`/author/${author.key}`}
-                    className="hover:text-blue transition-colors mb-4"
+                    className="hover:text-blue transition-colors"
                   >
                     {author.name}
                   </Link>
@@ -88,10 +88,12 @@ export default async function BookPage({ params }: Props) {
         </p> */}
 
         {quote && (
-          <p className="font-bold text-md mb-4 font-averia">{quote}</p>
+          <p className="font-bold text-md my-4 font-averia">"{quote}"</p>
         )}
 
-        <p className="whitespace-pre-line text-sm">{body}</p>
+        <p className="whitespace-pre-line text-sm text-foreground-dim">
+          {body}
+        </p>
       </div>
     </div>
   );

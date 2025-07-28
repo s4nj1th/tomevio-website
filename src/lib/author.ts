@@ -2,6 +2,7 @@ export type Author = {
   name: string;
   bio?: string;
   works?: Work[];
+  lifespan?: string;
 };
 
 type Work = {

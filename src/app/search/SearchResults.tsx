@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Book, Author, searchBooksAndAuthors } from "@/lib/search";
-
 import AuthorImage from "@/components/AuthorImage";
 
 export default function SearchResults() {
@@ -29,136 +28,131 @@ export default function SearchResults() {
     fetchData();
   }, [query]);
 
-  const renderResults = () => {
-    if (loading) {
-      return (
-        <p className="text-foreground-muted text-center">
-          Searching...
-        </p>
-      );
-    }
+  const sharedItemClasses =
+    "flex gap-4 px-5 py-6 items-center transition rounded-md";
+  const imageWrapperClasses =
+    "w-[80px] h-[120px] flex items-center justify-center bg-gray-100 text-gray-600 text-[10px] overflow-hidden shadow-black shadow-lg border border-border-muted";
 
-    const sharedItemClasses =
-      "flex gap-4 px-5 py-6 items-center transition hover:bg-background-bright rounded-md";
-
-    const imageWrapperClasses =
-      "w-[80px] h-[120px] flex items-center justify-center bg-gray-100 text-gray-600 text-[10px] shadow-shadow-hard overflow-hidden";
-
-    const renderBookList = () => (
-      <section className="mb-10">
-        {books.length > 0 ? (
-          <ul className="space-y-3">
-            {books.map((book) => (
-              <div key={book.work_id}>
-                <li className={sharedItemClasses}>
-                  <div className={imageWrapperClasses}>
-                    {book.cover_id && book.cover_id > 0 ? (
-                      <img
-                        src={`https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
-                        alt={book.title}
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <div
-                        className="text-center px-1 font-averia"
-                      >
-                        {book.title}
-                        <br />({book.first_publish_year})
-                      </div>
-                    )}
-                  </div>
-                  <div className="flex flex-col justify-center">
-                    <Link
-                      href={`/book/${book.work_id}`}
-                      className="text-2xl font-bold hover:text-blue transition-colors font-averia"
-                    >
-                      {book.title}
-                    </Link>
-                    <span className="text-sm text-foreground-muted ml-1">
-                      by {book.author_name?.join(", ") || "Unknown"} (
-                      {book.first_publish_year || "n.d."})
-                    </span>
-                  </div>
-                </li>
-                <hr className="border-border-muted mx-5" />
-              </div>
-            ))}
-          </ul>
-        ) : (
-          <p className="text-foreground-dim text-center">
-            No books found.
-          </p>
-        )}
-      </section>
-    );
-
-    const renderAuthorList = () => (
-      <section className="mb-10">
-        {authors.length > 0 ? (
-          <ul className="space-y-3">
-            {authors.map((author, idx) => (
-              <div key={`${author.author_id}-${idx}`}>
-                <li className={sharedItemClasses}>
-                  <div className={imageWrapperClasses}>
-                    <AuthorImage
-                      author_id={author.author_id}
-                      name={author.name}
+  const renderBookList = () => (
+    <section className="mb-10">
+      {books.length > 0 ? (
+        <ul>
+          {books.map((book) => (
+            <div key={book.work_id}>
+              <li className={sharedItemClasses}>
+                <Link
+                  href={`/book/${book.work_id}`}
+                  className={imageWrapperClasses}
+                >
+                  {book.cover_id && book.cover_id > 0 ? (
+                    <img
+                      src={`https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
+                      alt={book.title}
+                      className="w-full h-full object-cover"
                     />
-                  </div>
-                  <div className="flex flex-col justify-center">
-                    <Link
-                      href={`/author/${author.author_id}`}
-                      className="text-2xl font-bold hover:text-blue transition-colors font-averia"
-                    >
-                      {author.name}
-                    </Link>
+                  ) : (
+                    <div className="text-center px-3 font-averia">
+                      {book.title}
+                      <br />({book.first_publish_year || "n.d."})
+                    </div>
+                  )}
+                </Link>
+
+                <div className="flex flex-col justify-center">
+                  <Link
+                    href={`/book/${book.work_id}`}
+                    className="text-2xl font-bold hover:text-blue transition-colors font-averia"
+                  >
+                    {book.title}
+                  </Link>
+
+                  {book.author_name && book.author_id ? (
                     <span className="text-sm text-foreground-muted ml-1">
-                      ({author.work_count} works)
+                      by{" "}
+                      {book.author_name.map((name, i) => {
+                        const id = book.author_id?.[i];
+                        return (
+                          <span key={id || name}>
+                            <Link
+                              href={`/author/${id}`}
+                              className="hover:text-blue text-foreground-muted transition"
+                            >
+                              {name}
+                            </Link>
+                            {i < book.author_name.length - 1 && ", "}
+                          </span>
+                        );
+                      })}{" "}
+                      ({book.first_publish_year || "n.d."})
                     </span>
-                  </div>
-                </li>
-                <hr className="border-border-muted mx-5" />
-              </div>
-            ))}
-          </ul>
-        ) : (
-          <p className="text-foreground-dim text-center">
-            No authors found.
-          </p>
-        )}
-      </section>
-    );
+                  ) : (
+                    <span className="text-sm text-foreground-muted ml-1">
+                      by Unknown ({book.first_publish_year || "n.d."})
+                    </span>
+                  )}
+                </div>
+              </li>
+              <hr className="border-border-muted mx-5" />
+            </div>
+          ))}
+        </ul>
+      ) : (
+        <p className="text-foreground-faint text-center">No books found.</p>
+      )}
+    </section>
+  );
 
-    return filter === "books" ? renderBookList() : renderAuthorList();
-  };
+  const renderAuthorList = () => (
+    <section className="mb-10">
+      {authors.length > 0 ? (
+        <ul>
+          {authors.map((author, idx) => (
+            <div key={`${author.author_id}-${idx}`}>
+              <li className={sharedItemClasses}>
+                <Link
+                  href={`/author/${author.author_id}`}
+                  className={imageWrapperClasses}
+                >
+                  <AuthorImage author_id={author.author_id} name={author.name} />
+                </Link>
+                <div className="flex flex-col justify-center">
+                  <Link
+                    href={`/author/${author.author_id}`}
+                    className="text-2xl font-bold hover:text-blue transition-colors font-averia"
+                  >
+                    {author.name}
+                  </Link>
+                  <span className="text-sm text-foreground-muted ml-1">
+                    ({author.work_count} works)
+                  </span>
+                </div>
+              </li>
+              <hr className="border-border-muted mx-5" />
+            </div>
+          ))}
+        </ul>
+      ) : (
+        <p className="text-foreground-faint text-center">No authors found.</p>
+      )}
+    </section>
+  );
 
-  const FilterDropdown = () => (
-    <div className="md:hidden mb-4">
-      <label
-        htmlFor="filter-select"
-        className="block text-xs text-foreground-muted uppercase mb-1 tracking-wide"
-      >
-        Show results for
-      </label>
-      <div className="relative">
-        <select
-          id="filter-select"
-          value={filter}
-          onChange={(e) => setFilter(e.target.value as "books" | "authors")}
-          className="w-full appearance-none bg-background-secondary text-foreground font-semibold px-4 py-2 pr-10 rounded border border-border-default focus:outline-none"
-        >
-          <option value="books">Books</option>
-          <option value="authors">Authors</option>
-        </select>
-        <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-foreground-muted">
-          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-            <path
-              fillRule="evenodd"
-              d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 011.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.25 8.29a.75.75 0 01-.02-1.08z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </div>
+  const FilterTabsMobile = () => (
+    <div className="md:hidden mb-2 overflow-x-auto no-scrollbar">
+      <div className="flex space-x-3 pb-2 px-2">
+        {["books", "authors"].map((item) => (
+          <button
+            key={item}
+            onClick={() => setFilter(item as "books" | "authors")}
+            className={`flex-shrink-0 px-2 py-1 rounded text-sm font-medium border transition-all whitespace-nowrap ${
+              filter === item
+                ? "bg-background-bright text-foreground border-background-brightest"
+                : "bg-background-secondary border-border-default text-foreground-muted hover:bg-background-bright"
+            }`}
+          >
+            {item.charAt(0).toUpperCase() + item.slice(1)}
+          </button>
+        ))}
       </div>
     </div>
   );
@@ -193,9 +187,14 @@ export default function SearchResults() {
         <p className="text-sm text-foreground-muted uppercase py-2">
           Search results for &quot;{query}&quot;
         </p>
-        <hr className="mb-6 border-border-muted" />
-        <FilterDropdown />
-        {renderResults()}
+        <FilterTabsMobile />
+        {loading ? (
+          <p className="text-foreground-faint text-center">Searching...</p>
+        ) : filter === "books" ? (
+          renderBookList()
+        ) : (
+          renderAuthorList()
+        )}
       </div>
       <FilterSidebar />
     </main>
