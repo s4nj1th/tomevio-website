@@ -2,8 +2,7 @@ export type Book = {
   title: string
   description?: string
   authors: Author[],
-  first_publish_year?: number
-  covers: number[]
+  cover?: number;
 }
 
 type Author = {
@@ -11,14 +10,14 @@ type Author = {
     key: string,
 }
 
-export async function fetchBook(work_id: string): Promise<Book | null> {
+export async function fetchBook(book_id: string): Promise<Book | null> {
   try {
-    const res = await fetch(`http://localhost:8080/book/${work_id}`, {
+    const res = await fetch(`http://localhost:8080/book/${book_id}`, {
     //   cache: 'no-store',
     })
 
     if (!res.ok) {
-      console.error(`Failed to fetch book ${work_id}:`, res.status)
+      console.error(`Failed to fetch book ${book_id}:`, res.status)
       return null
     }
 

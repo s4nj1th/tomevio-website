@@ -16,7 +16,6 @@ export default function SearchResults() {
 
   useEffect(() => {
     if (!query) return;
-
     const fetchData = async () => {
       setLoading(true);
       const { books, authors } = await searchBooksAndAuthors(query);
@@ -24,72 +23,65 @@ export default function SearchResults() {
       setAuthors(authors);
       setLoading(false);
     };
-
     fetchData();
   }, [query]);
 
   const sharedItemClasses =
     "flex gap-4 px-5 py-6 items-center transition rounded-md";
   const imageWrapperClasses =
-    "w-[80px] h-[120px] flex items-center justify-center bg-gray-100 text-gray-600 text-[10px] overflow-hidden shadow-black shadow-lg border border-border-muted";
+    "w-[80px] h-[120px] flex items-center justify-center bg-foreground-dim text-background-bright text-[10px] overflow-hidden shadow-black shadow-lg border border-border-muted";
 
   const renderBookList = () => (
     <section className="mb-10">
       {books.length > 0 ? (
         <ul>
-          {books.map((book) => (
-            <div key={book.work_id}>
+          {books.map((book, idx) => (
+            <div key={idx}>
               <li className={sharedItemClasses}>
-                <Link
-                  href={`/book/${book.work_id}`}
-                  className={imageWrapperClasses}
-                >
-                  {book.cover_id && book.cover_id > 0 ? (
-                    <img
-                      src={`https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`}
-                      alt={book.title}
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <div className="text-center px-3 font-averia">
-                      {book.title}
-                      <br />({book.first_publish_year || "n.d."})
-                    </div>
-                  )}
+                <Link href={`/book/${book.id}`} className={imageWrapperClasses}>
+                  <img
+                    src={`https://covers.openlibrary.org/b/id/${book.cover}-M.jpg`}
+                    className="w-full h-full"
+                    alt=""
+                  />
+                  {/* <div className="text-center px-3 font-averia">
+                    {book.title}
+                    <br />({book.publish_date || "n.d."})
+                  </div> */}
                 </Link>
 
                 <div className="flex flex-col justify-center">
                   <Link
-                    href={`/book/${book.work_id}`}
+                    href={`/book/${book.id}`}
                     className="text-2xl font-bold hover:text-blue transition-colors font-averia"
                   >
                     {book.title}
                   </Link>
 
-                  {book.author_name && book.author_id ? (
+                  {/*
+                  {book.authors.length > 0 ? (
                     <span className="text-sm text-foreground-muted ml-1">
                       by{" "}
-                      {book.author_name.map((name, i) => {
-                        const id = book.author_id?.[i];
-                        return (
-                          <span key={id || name}>
-                            <Link
-                              href={`/author/${id}`}
-                              className="hover:text-blue text-foreground-muted transition"
-                            >
-                              {name}
-                            </Link>
-                            {i < book.author_name.length - 1 && ", "}
-                          </span>
-                        );
-                      })}{" "}
-                      ({book.first_publish_year || "n.d."})
+                      {book.authors.map(([name, id], i) => (
+                        <span key={id || name}>
+                          <Link
+                            href={`/author/${id}`}
+                            className="hover:text-blue text-foreground-muted transition"
+                          >
+                            {name}
+                          </Link>
+                          {i < book.authors.length - 1 && ", "}
+                        </span>
+                      ))}{" "}
+                      ({book.publish_date || "n.d."})
                     </span>
                   ) : (
                     <span className="text-sm text-foreground-muted ml-1">
-                      by Unknown ({book.first_publish_year || "n.d."})
+                      by Unknown ({book.publish_date || "n.d."})
                     </span>
                   )}
+
+*/}
                 </div>
               </li>
               <hr className="border-border-muted mx-5" />
@@ -106,14 +98,17 @@ export default function SearchResults() {
     <section className="mb-10">
       {authors.length > 0 ? (
         <ul>
-          {authors.map((author, idx) => (
-            <div key={`${author.author_id}-${idx}`}>
+          {authors.map((author) => (
+            <div key={author.author_id}>
               <li className={sharedItemClasses}>
                 <Link
                   href={`/author/${author.author_id}`}
                   className={imageWrapperClasses}
                 >
-                  <AuthorImage author_id={author.author_id} name={author.name} />
+                  <AuthorImage
+                    author_id={author.author_id}
+                    name={author.name}
+                  />
                 </Link>
                 <div className="flex flex-col justify-center">
                   <Link

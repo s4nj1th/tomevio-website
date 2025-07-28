@@ -1,10 +1,11 @@
 export type Book = {
   title: string;
-  author_name: string[];
-  author_id: string[];
-  work_id: string;
-  cover_id: number;
-  first_publish_year: number;
+  authors: string[][],
+  // work_id: string;
+  id: string;
+  publish_date: string;
+  number_of_pages: number;
+  cover: number;
 };
 
 export type Author = {

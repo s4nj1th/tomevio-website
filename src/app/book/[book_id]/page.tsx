@@ -4,13 +4,13 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
 type Props = {
-  params: { work_id?: string };
+  params: { book_id?: string };
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  if (!params?.work_id) return {};
+  if (!params?.book_id) return {};
 
-  const book = await fetchBook(params.work_id);
+  const book = await fetchBook(params.book_id);
   if (!book) return {};
 
   return {
@@ -35,32 +35,22 @@ function parseDescription(raw: string | undefined | null): {
 }
 
 export default async function BookPage({ params }: Props) {
-  if (!params?.work_id) {
+  if (!params?.book_id) {
     return notFound();
   }
 
-  const book = await fetchBook(params.work_id);
+  const book = await fetchBook(params.book_id);
   if (!book) {
     return <div className="p-8">Book not found or error loading.</div>;
   }
 
-  const hasValidCover = book.covers && book.covers.length > 0;
+  // const hasValidCover = book.covers && book.covers.length > 0;
   const { quote, body } = parseDescription(book.description);
 
   return (
     <div className="flex md:flex-row flex-col p-8 gap-4">
       <div className="w-[200px] aspect-[2/3] shrink-0 rounded overflow-hidden">
-        {hasValidCover ? (
-          <img
-            src={`https://covers.openlibrary.org/b/id/${book.covers[0]}-L.jpg`}
-            alt={book.title}
-            className="w-full h-fit object-contain border border-border-muted shadow-lg shadow-black"
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center text-center text-lg text-background-brightest font-averia p-4 border border-border-muted shadow-lg shadow-black">
-            {book.title}
-          </div>
-        )}
+      <img src={`https://covers.openlibrary.org/b/id/${book.cover}-L.jpg`} alt="" />
       </div>
 
       <div>
