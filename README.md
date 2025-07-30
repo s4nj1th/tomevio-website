@@ -1,110 +1,89 @@
 <div align="center">
   <h1>Tomevio Website</h1>
-    <picture>
+  <picture>
     <source media="(prefers-color-scheme: dark)" srcset="public/logo-dark.svg">
     <source media="(prefers-color-scheme: light)" srcset="assets/logo-light.svg">
-    <img alt="Tomevio Backend: A fast, modular backend for a book tracking platform."
+    <img alt="Tomevio: Your personal book tracking companion"
          src="assets/logo-light.svg"
          width="50%">
   </picture>
-  <p>The web frontend for the Tomevio book tracking platform.</p>
+  <p>A modern web interface for tracking and discovering books</p>
 </div>
 
----
+## Overview
 
-This repo contains the web frontend for **Tomevio**, a FOSS book tracking platform. Built using **Next.js** (React + TypeScript), it connects to the [Tomevio backend](https://github.com/s4nj1th/tomevio-backend) and provides a fast, responsive interface for tracking books across devices.
+The Tomevio web frontend provides a responsive, user-friendly interface for the [Tomevio book tracking platform](https://github.com/s4nj1th/tomevio-backend). Built with **Next.js** (React + TypeScript), it delivers:
 
----
+- Instant search and discovery of books and authors
+- Seamless synchronization across devices
+- Optimized performance through static generation
+- Intuitive book management interface
 
-## Features
+## Key Features
 
-- **Book Search**: Search books and authors using the Tomevio API.
-- **Book Details**: View descriptions, authors, and metadata.
-- **Author Pages**: See author bios and related works.
-- **Responsive UI**: Works across desktop and mobile devices.
-- **Built with Next.js**: Fast, SEO-friendly rendering with API integration.
+- **Comprehensive Book Search** - Find titles and authors through the Tomevio API
+- **Rich Book Details** - View covers, descriptions, and publication information
+- **Author Profiles** - Explore biographies and complete bibliographies
+- **Cross-Device Experience** - Fully responsive design for all screen sizes
+- **Modern Tech Stack** - Next.js, TypeScript, and optimized API integration
 
----
-
-## Getting Started
+## Quick Start
 
 ### Prerequisites
-
-- [Node.js](https://nodejs.org/)
-- [npm](https://www.npmjs.com/) or [Yarn](https://yarnpkg.com/)
+- Node.js v18+
+- npm or Yarn
 
 ### Installation
+```bash
+# Clone repository
+git clone https://github.com/s4nj1th/tomevio-website.git
+cd tomevio-website
 
-1. Clone the repository:
+# Install dependencies
+npm install
+# or
+yarn install
 
-   ```bash
-   git clone https://github.com/your-org/tomevio-website.git
-   cd tomevio-website
-   ```
-
-
-2. Install dependencies:
-
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
-
-3. Run the development server:
-
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   ```
-
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
-
----
-
-## Environment Variables
-
-Create a `.env.local` file with the following:
-
-```
-NEXT_PUBLIC_API_BASE_URL=http://localhost:8080
+# Start development server
+npm run dev
+# or
+yarn dev
 ```
 
-Update the URL based on your backend deployment.
+Visit `http://localhost:3000` in your browser to access the application.
 
----
+## Configuration
 
-## Project Structure
+Create a `.env.local` file with your environment variables:
 
-* `pages/`: App routes
-* `components/`: Reusable UI components
-* `lib/`: API helpers and utilities
-* `styles/`: Global and scoped styles
+```env
+NEXT_PUBLIC_API_BASE_URL=http://localhost:8080  # Point to your backend instance
+```
 
----
+## Project Architecture
 
-## Contributing
+```
+tomevio-website/
+├── pages/          # Application routes and pages
+├── components/     # Reusable UI components
+├── lib/            # API clients and utilities
+├── public/         # Static assets
+├── styles/         # Global and component styles
+└── types/          # TypeScript type definitions
+```
 
-Pull requests and issues are welcome!
-Please:
+## Development Guidelines
 
-* Use consistent code formatting (`prettier`)
-* Keep components modular and accessible
-* Document major changes
-
----
+We welcome contributions! Please ensure:
+- Code follows existing style (`prettier` formatted)
+- Components remain modular and testable
+- New features include appropriate documentation
+- Changes are thoroughly tested
 
 ## License
+Distributed under the [MIT License](LICENSE).
 
-Licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
-
-## Maintainers
-
-### Sanjith
-
-* [Github](https://github.com/s4nj1th)
-* [Twitter (X)](https://x.com/s4nj1th)
-* [Email](mailto:sanjith.develops@gmail.com)
+## Contact
+### Project Maintainer
+**Sanjith**
+[GitHub](https://github.com/s4nj1th) | [Twitter](https://x.com/s4nj1th) | [Email](mailto:sanjith.develops@gmail.com)
