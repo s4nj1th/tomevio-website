@@ -1,3 +1,5 @@
+const apiURL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 export type Book = {
   title: string;
   authors: string[][],
@@ -19,7 +21,7 @@ export async function searchBooksAndAuthors(query: string): Promise<{
   authors: Author[];
 }> {
   try {
-    const res = await fetch(`http://localhost:8080/search?q=${encodeURIComponent(query)}`, {
+    const res = await fetch(`${apiURL}/search?q=${encodeURIComponent(query)}`, {
     //   cache: "no-store",
     });
 

@@ -1,3 +1,5 @@
+const apiURL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 export type Author = {
   name: string;
   bio?: string;
@@ -12,7 +14,7 @@ type Work = {
 
 export async function fetchAuthor(author_id: string): Promise<Author | null> {
   try {
-    const res = await fetch(`http://localhost:8080/author/${author_id}`, {
+    const res = await fetch(`${apiURL}/author/${author_id}`, {
       //   cache: 'no-store',
     });
 

@@ -54,7 +54,7 @@ Visit `http://localhost:3000` in your browser to access the application.
 
 ## Configuration
 
-Create a `.env.local` file with your environment variables:
+Create a `.env` file with your environment variables:
 
 ```env
 NEXT_PUBLIC_API_BASE_URL=http://localhost:8080  # Point to your backend instance

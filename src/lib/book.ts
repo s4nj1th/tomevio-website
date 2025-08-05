@@ -1,3 +1,5 @@
+const apiURL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 export type Book = {
   title: string
   description?: string
@@ -12,7 +14,7 @@ type Author = {
 
 export async function fetchBook(book_id: string): Promise<Book | null> {
   try {
-    const res = await fetch(`http://localhost:8080/book/${book_id}`, {
+    const res = await fetch(`${apiURL}/book/${book_id}`, {
     //   cache: 'no-store',
     })
 
